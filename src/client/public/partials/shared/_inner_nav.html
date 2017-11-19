@@ -1,0 +1,19 @@
+<nav ng-controller="navController" ng-init="initInternal()">
+    <div class="container">
+        <div class="row">
+            <div class="ten columns">
+                <span>User Dashboard</span>
+                <span class="sep">|</span>
+                <span><a href="#!/dashboard">Home</a></span>
+                <span class="sep">|</span>
+                <span><a href="#!/users/{{userID}}">Profile</a></span>
+				<span class="sep">|</span>
+				<span><a href="#!/chat">Chat</a></span>
+            </div>
+            <div class="two columns">
+                <button ng-click="logout()">Logout</button>
+				<button ng-click="logoutAll()">Logout All</button>
+            </div>
+        </div>
+    </div>
+</nav>

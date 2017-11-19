@@ -1,0 +1,100 @@
+<ng-include src="'partials/shared/_inner_nav.html'"></ng-include>
+<div class="container" ng-controller="profileController" ng-init="show()">
+    <div class="row">
+        <h1>{{viewedUser.firstName}} {{viewedUser.lastName}}</h1> 
+        <div ng-if="viewedUser._id === userID">
+			<a href="#!/users/{{viewedUser._id}}/edit">Edit Profile</a>
+		</div>
+		<p>Joined at: {{viewedUser.createdAt | date: 'MM/dd/yyyy HH:mm:ss'}}</p>
+        <p>User ID: {{viewedUser._id}}</p>
+        <p ng-if="viewedUser.description.modified">Description: {{viewedUser.description.text}}</p>
+    </div>
+    <div class="row">
+        <div class="six columns">
+            <ul ng-if="errors.newMessage">
+                <li ng-repeat="error in errors.newMessage">{{error}}</li>
+            </ul>
+            <form ng-submit="postMessage()">
+                <div>
+                    <textarea 
+                        placeholder="Leave a message for {{viewedUser.username}}"
+                        ng-model="message.text"></textarea>
+                </div>
+                <button type="submit">Post Message</button>
+            </form>
+        </div>
+    </div>
+    <div class="row" ng-repeat="message in messages track by $index">
+        <div>
+            <div class="six columns offset-by-three">
+                <fieldset class="message">
+                    <legend>{{message.messageFrom.username}} said at {{message.createdAt | date}}</legend>
+                    <div ng-if="!message.editing">
+                        <p>{{message.text}}</p>
+                        <p ng-if="message.edited">(edited)</p>
+                    </div>
+                    <div ng-if="message.editing" ng-init="message.editingBuffer = message.text.slice()">
+                        <ul ng-if="errors[message._id]">
+                            <li ng-repeat="error in errors[message._id]">{{error}}</li>
+                        </ul>
+                        <form ng-submit="saveMessageEdit(message)">
+							<textarea ng-model="message.text"></textarea>
+							<button type="submit">Save</button>
+							<button 
+								type="button" 
+								ng-click="cancelMessageEdit(message.editingBuffer, message)">Cancel
+							</button>
+                        </form>
+                    </div>
+					<fieldset class="message" ng-repeat="comment in message.comments">
+						<div ng-if="!comment.editing">
+							<legend>{{comment.commentBy.username}} said at {{comment.createdAt | date}}</legend>
+							<p>{{comment.text}}</p>
+							<p ng-if="comment.edited">(edited)</p>
+							<p ng-if="comment.commentBy._id === userID">
+								<button ng-click="editComment(comment)">Edit</button>
+								<button ng-click="deleteComment(message._id, comment._id)">Delete</button>
+							</p>
+						</div>
+						<div ng-if="comment.editing" ng-init="comment.editingBuffer = comment.text.slice()">
+							<ul ng-if="errors.comments[comment._id]">	
+								<li ng-repeat="error in errors.comments[comment._id]">{{error}}</li>
+							</ul>
+							<form ng-submit="saveCommentEdit(comment)">
+								<textarea ng-model="comment.text"></textarea>
+								<button>Save</button>
+								<button 
+									ng-click="cancelCommentEdit(comment.editingBuffer, comment)">Cancel</button>
+							</form>
+						</div>
+					</fieldset>
+					<fieldset class="message" ng-if="message.commenting">
+						<ul ng-if="commentBuffers[message._id].errors">
+							<li ng-repeat="error in commentBuffers[message._id].errors">
+								{{error}}
+							</li>
+						</ul>
+						<form ng-submit="postComment(message, commentBuffers[message._id])">
+							<textarea ng-model="commentBuffers[message._id].text"></textarea>
+							<button type="submit">Post Comment</button>
+							<button type="button" ng-click="cancelComment(message)">Cancel</button>
+						</form>
+					</div>
+                </fieldset>
+            </div>
+            <div class="three columns">
+                <fieldset class="actions">
+                    <legend>Actions</legend> 
+                    <button 
+						ng-click="deleteMessage(message._id)"
+						ng-if="message.messageFrom._id === userID || 
+							   message.messageTo === userID">Delete</button>
+                    <button 
+						ng-click="editMessage(message)"
+						ng-if="message.messageFrom._id === userID">Edit</button>
+					<button ng-click="writeComment(message)">Comment</button>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<ng-include src="'partials/shared/_inner_nav.html'"></ng-include>
+<div class="container" ng-controller="userController" ng-init="viewUser()">
+	<div class="row">
+		<div class="six columns offset-by-three">
+			<ul ng-if="messages">
+				<li ng-repeat="message in messages">{{message}}</li>
+			</ul>
+		</div>
+	</div>
+	<div class="row">
+		<div class="six columns">
+			<fieldset class="form">
+				<legend>Edit Personal Info</legend>
+				<ul ng-if="errors.editInfo">
+					<li ng-repeat="error in errors.editInfo">{{error}}</li>
+				</ul>
+				<form ng-submit="editInfo()">
+					<label>First Name: </label>
+					<input type="text" ng-model="firstName">
+					<label>Last Name: </label>
+					<input type="text" ng-model="lastName">
+					<button type="submit">Edit Personal Info</button>
+				</form>
+			</fieldset>
+		</div>
+		<div class="six columns">
+			<fieldset class="form">
+				<legend>Change Password</legend>
+				<ul ng-if="errors.editPassword">
+					<li ng-repeat="error in errors.editPassword">{{error}}</li>
+				</ul>
+				<form ng-submit="editPassword()">
+					<label>Password: </label>
+					<input type="text" ng-model="password">
+					<label>Confirm Password: </label>
+					<input type="password" ng-model="confirmPW">
+					<button type="submit">Edit password</button>
+				</form>
+			</fieldset>
+		</div>
+	</div>
+	<div class="row">
+		<div class="twelve columns">
+			<fieldset class="form">	
+				<legend>Edit description</legend>
+				<ul ng-if="errors.editDescription">
+					<li ng-repeat="error in errors.editDescription">{{error}}</li>
+				</ul>
+				<form ng-submit="editDescription()">
+					<textarea ng-model="description.text"></textarea>
+					<button type="submit">Edit Description</button>
+				</form>
+			</fieldset>
+		</div>
+	</div>
+</div>

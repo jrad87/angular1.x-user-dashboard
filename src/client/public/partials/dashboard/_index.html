@@ -1,0 +1,38 @@
+<ng-include src="'partials/shared/_inner_nav.html'"></ng-include>
+<main class="container" ng-controller="dashboardController" ng-init="index()">
+    <div class="row">
+        <h1>Welcome, {{currentUser.firstName}} {{currentUser.lastName}}</h1>
+        <div>	
+			<h2 ng-if="currentUser.isAdmin">Manage Users</h2>
+			<a href="/">Add user</a>
+		</div>
+		<table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Join Date</th>
+                    <th>Privileges</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in otherUsers">
+                    <td>
+                        <a href="#!/users/{{user._id}}">
+                            {{user.firstName}} {{user.lastName}}
+                        </a>
+                    </td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.createdAt | date: 'MM/dd/yyyy hh:mm:ss'}}</td>
+                    <td ng-if="user.isAdmin">Admin</td>
+                    <td ng-if="!user.isAdmin">Basic</td>
+                    <td>
+                        <button ng-click="delete(user._id)">Delete</button>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</main>

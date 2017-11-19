@@ -1,0 +1,32 @@
+<html ng-app="dashboard">
+    <head>
+        <title>Dashboard</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+        <link rel="stylesheet" href="stylesheets/style.css">
+        <!--script src="angular/angular.js"></script>
+        <script src="angular-route/angular-route.js"></script>
+        <script src="angular-cookies/angular-cookies.js"></script>
+        <script src="socket.io-client/dist/socket.io.js"></script>
+		<script src="app.js"></script>
+        <script src="services/auth.js"></script>
+        <script src="services/user.js"></script>
+        <script src="factories/users.js"></script>
+        <script src="factories/messages.js"></script>
+        <script src="factories/sockets.js"></script>
+		<script src="controllers/nav.js"></script>
+        <script src="controllers/entry.js"></script>
+        <script src="controllers/dashboard.js"></script>
+        <script src="controllers/profile.js"></script>
+		<script src="controllers/user.js"></script>
+		<script src="controllers/chat.js"></script-->
+		<script src="bundle.js"></script>
+	</head>
+    <body>
+        <div id="app">
+            <ng-view></ng-view>
+        </div>
+        <ng-include src="'partials/shared/_footer.html'"></ng-include>
+    </body>
+</html>

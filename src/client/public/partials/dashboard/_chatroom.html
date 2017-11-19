@@ -1,0 +1,11 @@
+<ng-include src="'partials/shared/_inner_nav.html'"></ng-include>
+<div class="container" ng-controller="chatController" ng-init="init()">
+	<div class="row">
+		<h1>Chat</h1>
+		<div style="width: 500px; border: 1px solid black; min-height: 50px;">
+			<p ng-repeat="message in messages track by $index">{{message}}</p>
+		</div>
+		<input type="text" ng-model="message">
+		<button ng-click="send()">Send</button>
+	</div>
+</div>

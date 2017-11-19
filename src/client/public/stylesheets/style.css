@@ -1,0 +1,34 @@
+html{
+    height: 100%;
+}
+nav{
+    border-bottom: 1px solid black;
+}
+body{
+    height: 100%;
+    display: flex;
+    flex-direction:column;
+}
+#app{
+    flex: 1 0 auto;
+}
+fieldset.form, fieldset.message, fieldset.actions {
+    border: 3px solid black;
+    padding: 10px 30px;
+}
+    fieldset.form legend, fieldset.message legend, fieldset.actions legend {
+        padding: 0px 5px;
+    }
+
+.message-container{
+    display:flex;
+}
+
+fieldset.message, fieldset.actions, fieldset.form {
+    border-radius: 20px;
+}
+
+footer{
+    border-top: 1px solid black;
+    flex: none;
+}

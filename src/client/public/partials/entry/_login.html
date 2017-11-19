@@ -1,0 +1,24 @@
+<ng-include src="'partials/shared/_entry_nav.html'"></ng-include>
+<main class="container" ng-controller="entryController">
+    <div class="row">
+        <div class="four columns">
+            <fieldset class="form">
+                <legend>Login</legend>
+                <ul ng-if="errors">
+                    <li ng-repeat="error in errors">
+                        {{error}}
+                    </li>
+                </ul>
+                <form ng-submit="login()">
+                    <label>Username</label>
+                    <input type="text" ng-model="user.username">
+                    <label>Password</label>
+                    <input type="password" ng-model="user.password">
+                    <button type="submit">Log in</button>
+                </form>
+                <label>Don't have an account?</label>
+                <a href="#!/register"><button>Register here</button></a>
+            </fieldset>
+        </div>
+    </div>
+</main>
